@@ -1,0 +1,21 @@
+# Backups
+*.backup
+*.bak
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Logs
+*.log
+
+# OS junk
+Thumbs.db
+Desktop.ini
+
+# Secrets
+*.key
+*.pem
+.env
+.env.*
