@@ -1,11 +1,5 @@
 $Repo = $PSScriptRoot
 
-Write-Host "Backing up PowerShell profile..."
-Copy-Item `
-    $PROFILE `
-    "$Repo\powershell\Microsoft.PowerShell_profile.ps1" `
-    -Force
-
 Write-Host "Backing up Git config..."
 Copy-Item `
     "$HOME\.gitconfig" `
