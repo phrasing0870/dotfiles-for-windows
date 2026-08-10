@@ -74,4 +74,9 @@ Copy-Item `
     -Force
 
 
-Write-Host "Setup complete."
+Write-Host "Applying Windows preferences..."
+
+& "$Repo\windows\explorer.ps1"
+
+
+    Write-Host "Setup complete."
