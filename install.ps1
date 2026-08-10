@@ -1,0 +1,35 @@
+$Repo = $PSScriptRoot
+
+Write-Host "Installing Winget packages..."
+winget import `
+    -i "$Repo\winget\packages.json" `
+    --ignore-unavailable `
+    --accept-package-agreements `
+    --accept-source-agreements
+
+Write-Host "Restoring VS Code extensions..."
+
+Get-Content "$Repo\vscode\extensions.txt" | ForEach-Object {
+    code --install-extension $_
+}
+
+Write-Host "Linking PowerShell profile..."
+
+$ProfileTarget = "$Repo\powershell\Microsoft.PowerShell_profile.ps1"
+
+New-Item `
+    -ItemType Directory `
+    -Path (Split-Path $PROFILE) `
+    -Force | Out-Null
+
+if (Test-Path $PROFILE) {
+    Copy-Item $PROFILE "$PROFILE.backup" -Force
+    Remove-Item $PROFILE -Force
+}
+
+New-Item `
+    -ItemType SymbolicLink `
+    -Path $PROFILE `
+    -Target $ProfileTarget
+
+Write-Host "Setup complete."
